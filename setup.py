@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 
 """
-setup.py file for OpenBabel wrapper
+setup.py file for obcalc
 """
 
 """
-To generate swig:
+To generate swig files:
     cd swig
     swig -c++ -python obwrap.i
     mv obwrap.py ../obcalc
@@ -15,20 +15,18 @@ To build:
 """
 
 from distutils.core import setup, Extension
+import os
 
 
 libraries = [
     'openbabel',
 ]
+library_dirs = []
+include_dirs = []
 
-library_dirs = [
-    '/scratch/s052580/opt/openbabel/lib/',
-]
-
-include_dirs = [
-    '/usr/include/openbabel-2.0',
-    '/scratch/s052580/opt/openbabel/include/openbabel-2.0/',
-]
+customize = 'customize.py'
+if os.path.isfile(customize):
+    execfile(customize)
 
 obwrap_module = Extension('_obwrap',
                           sources=['swig/obwrap_wrap.cxx', 'swig/obwrap.cxx'],
