@@ -49,6 +49,9 @@ class OBForceField:
         self.atoms = None
         self.bonds = bonds
 
+        self.energy = None
+        self.force = None
+
     def get_potential_energy(self, atoms=None, force_consistent=False):
         """Return total energy"""
         self.calculate(atoms)
@@ -70,28 +73,38 @@ class OBForceField:
     def set_atoms(self, atoms):
         self.atoms = atoms.copy()
 
+    def calculation_required(self, atoms):
+        if self.energy is None or self.forces is None:
+            return True
+        if len(atoms) != len(self.atoms) or \
+           (atoms.get_atomic_numbers() != self.atoms.get_atomic_numbers()).any() or \
+           (atoms.get_positions() != self.atoms.get_positions()).any():
+            return True
+        else:
+            return False
+
     def calculate(self, atoms):
         if atoms is None:
             atoms = self.atoms
 
-        #XXX: dont redo a good calculation
+        if self.calculation_required(atoms):
+            mol = atoms_to_obmol(atoms, self.bonds)
+            ff = ob.OBForceField.FindForceField(self.force_field)
+            ff.Setup(mol)
+            energy = ff.Energy()
+            ff.GetCoordinates(mol)
+            forces = get_forces(mol)
 
-        mol = atoms_to_obmol(atoms, self.bonds)
-        ff = ob.OBForceField.FindForceField(self.force_field)
-        ff.Setup(mol)
-        energy = ff.Energy()
-        ff.GetCoordinates(mol)
-        forces = get_forces(mol)
+            if ff.GetUnit() == 'kJ/mol':
+                energy *= units.kJ / units.mol
+                forces *= units.kJ / units.mol
+            elif ff.GetUnit() == 'kcal/mol':
+                energy *= units.kcal / units.mol
+                forces *= units.kcal / units.mol
+            else:
+                raise NotImplementedError
 
-        if ff.GetUnit() == 'kJ/mol':
-            energy *= units.kJ / units.mol
-            forces *= units.kJ / units.mol
-        elif ff.GetUnit() == 'kcal/mol':
-            energy *= units.kcal / units.mol
-            forces *= units.kcal / units.mol
-        else:
-            raise NotImplementedError
+            self.energy = energy
+            self.forces = forces
 
-        self.energy = energy
-        self.forces = forces
-
+            self.atoms = atoms.copy()
