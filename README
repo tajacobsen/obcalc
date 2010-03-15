@@ -11,25 +11,25 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 Introduction
 ============
 
-OpenBabel_ is a chemical toolbox designed to speak the many languages of
+OpenBabel is a chemical toolbox designed to speak the many languages of
 chemical data. It's an open, collaborative project allowing anyone to search,
 convert, analyze, or store data from molecular modeling, chemistry,
 solid-state materials, biochemistry, or related areas.  
 
-The :class:`~ase.calculators.openbabel.OBForceField` calculator use the force
-fields (currently UFF and ghemical) included in OpenBabel.
+The obcalc.OBForceField calculator use the force fields (currently UFF and
+ghemical) included in OpenBabel.
 
 To use this calculator you need to have the OpenBabel python bindings
 installed:
 
 - Ubuntu/Fedora: python-openbabel
 
-.. _OpenBabel: http://www.openbabel.org
+OpenBabel: http://www.openbabel.org
 
 OBForceField Calculator Class
 =============================
 
-.. class:: OBForceField(force_field='UFF', bonds=None)
+OBForceField(force_field='UFF', bonds=None)
 
 Here is a detailed list of all the keywords for the calculator:
 
@@ -52,7 +52,7 @@ Here is an example of how to calculate the total energy CO::
         
   #!/usr/bin/env python
   from ase import molecule
-  from ase.calculators.openbabel import OBForceField
+  from obcalc import OBForceField
   
   atoms = molecule('CO')
 
@@ -68,7 +68,7 @@ OpenBabel will not detect the bonds and we have to put them manually::
 
   #!/usr/bin/env python
   from ase import Atoms, QuasiNewton
-  from ase.calculators.openbabel import OBForceField
+  from obcalc import OBForceField
 
   atoms = Atoms('OCO', [[0.0, 0.0, 0.0],
                         [3.0, 0.0, 0.0],
