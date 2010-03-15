@@ -10,6 +10,9 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
 Installation
 ============
+It may be necessary to edit customize.py to point to openbabel include and
+library dirs.
+
 Global installation:
 python setup.py install
 
