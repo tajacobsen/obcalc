@@ -7,7 +7,7 @@ The OpenBabel Python interface is described in
 O'Boyle et al., Chem. Cent. J., 2, 5 (2008), doi:10.1186/1752-153X-2-5
 
 Copyright (C) 2010 Troels Kofoed Jacobsen
-Code released under GPLv2. See COPYING for details.
+Code released under GPLv2 (or later). See COPYING for details.
 """
 import sys
 import time

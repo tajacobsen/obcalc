@@ -1,7 +1,7 @@
 """Tools easing the work with OpenBabel
 
 Copyright (C) 2010 Troels Kofoed Jacobsen
-Code released under GPLv2. See COPYING for details.
+Code released under GPLv2 (or later). See COPYING for details.
 """
 import numpy as np
 import openbabel as ob
