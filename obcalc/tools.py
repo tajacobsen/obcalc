@@ -1,6 +1,6 @@
 """Tools easing the work with OpenBabel
 
-Copyright (C) 2010 by Troels Kofoed Jacobsen
+Copyright (C) 2010 Troels Kofoed Jacobsen
 Code released under GPLv2. See COPYING for details.
 """
 import numpy as np
