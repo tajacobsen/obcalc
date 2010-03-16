@@ -11,7 +11,7 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 NOTE
 ====
 Due to licensing restrictions, this code is made to run with the GPLv2 version
-of ASE! (However it works with the newer as well)
+of ASE (svn revision 970 or earlier)! (However it works with the newer as well)
 
 Installation
 ============
