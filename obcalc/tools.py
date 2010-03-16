@@ -90,3 +90,36 @@ def get_bonds(mol):
                 obbond.GetBondOrder()]
         bonds.append(bond)
     return bonds
+
+def build_molecule(smi, return_bonds=False, relax=True):
+    """Build molecule from SMILES string.
+
+    Parameters
+    ==========
+    smi: str
+        SMILES string specifying the molecule to build
+    return_bonds: bool
+        If True, a list of list of 3xint describing the bonds will be returned.
+    relax: bool
+        If True, the geometry will be relaxed.
+    """
+
+    obconv = ob.OBConversion()
+    obconv.SetInAndOutFormats("smi", "mol")
+
+    mol = ob.OBMol()
+    obconv.ReadString(mol, smi)
+
+    # Create 3D geometry
+    obbuild = ob.OBBuilder()
+    obbuild.Build(mol)
+
+    mol.AddHydrogens()
+
+    if relax:
+        ff = ob.OBForceField.FindForceField('UFF')
+        ff.Setup(mol)
+        ff.ConjugateGradients(250, 1.0e-4);
+        ff.UpdateCoordinates(mol);
+
+    return obmol_to_atoms(mol, return_bonds=return_bonds)
