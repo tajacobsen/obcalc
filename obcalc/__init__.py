@@ -83,7 +83,7 @@ class OBForceField:
     def set_atoms(self, atoms):
         self.atoms = atoms.copy()
 
-    def calculation_required(self, atoms):
+    def calculation_required(self, atoms, quantities):
         if self.energy is None or self.forces is None:
             return True
         if len(atoms) != len(self.atoms) or \
@@ -97,7 +97,7 @@ class OBForceField:
         if atoms is None:
             atoms = self.atoms
 
-        if self.calculation_required(atoms):
+        if self.calculation_required(atoms, ['energy', 'forces']):
             mol = atoms_to_obmol(atoms, self.bonds)
             ff = ob.OBForceField.FindForceField(self.force_field)
             ff.Setup(mol)
