@@ -102,6 +102,9 @@ def build_molecule(smi, return_bonds=False, relax=True):
         If True, a list of list of 3xint describing the bonds will be returned.
     relax: bool
         If True, the geometry will be relaxed.
+
+    See the wikipedia article for info:
+        http://en.wikipedia.org/wiki/Simplified_molecular_input_line_entry_specification
     """
 
     obconv = ob.OBConversion()
