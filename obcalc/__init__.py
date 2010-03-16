@@ -16,7 +16,7 @@ import numpy as np
 import openbabel as ob
 from ase import units, Atom, Atoms
 
-from obcalc.tools import atoms_to_obmol, get_forces
+from obcalc.tools import atoms_to_obmol, get_forces, get_bonds
 
 class OBForceField:
     """OpenBabel Force Field calculator
@@ -123,18 +123,48 @@ class OBForceField:
             if self.txt is not None:
                 print >> self.txt, time.asctime()
 
-                #XXX: Do this myself as OpenBabel indices are funky
-                obConversion = ob.OBConversion()
-                obConversion.SetInAndOutFormats("mol", "molreport")
-                out = obConversion.WriteString(mol)
-                print >> self.txt,  out
-
-                print >> self.txt, 'Energy in eV:\t%.4f' % self.energy
+                self.print_positions()
                 print >> self.txt, ''
-                symbols = self.atoms.get_chemical_symbols()
-                print >> self.txt, 'Forces in eV/Ang:'
-                for a, symbol in enumerate(symbols):
-                    print >> self.txt, '%3d %-2s %10.5f %10.5f %10.5f' % \
-                        ((a, symbol) + tuple(self.forces[a]))
+
+                self.print_bonds(mol)
+                print >> self.txt, ''
+
+                self.print_energy()
+                print >> self.txt, ''
+
+                self.print_forces()
                 print >> self.txt, '\n'
+
+    def print_positions(self):
+        symbols = self.atoms.get_chemical_symbols()
+        print >> self.txt, 'Positions:'
+        for a, pos_c in enumerate(self.atoms.get_positions()):
+            symbol = symbols[a]
+            print >> self.txt, '%3d %-2s %9.4f %9.4f %9.4f' % \
+                    ((a, symbol) + tuple(pos_c))
+
+    def print_bonds(self, mol):
+        symbols = self.atoms.get_chemical_symbols()
+        order_to_symbol = ['', '-', '=', '#']
+        print >> self.txt, 'Bonds:'
+        print >> self.txt, ' ' * (3 + 1 + 5 + 1) + '%-5s %-5s %-5s' % \
+                ('Start', 'End', 'Order')
+        bonds = get_bonds(mol)
+        for a, bond in enumerate(bonds):
+            symbol0 = symbols[bond[0]]
+            symbol1 = symbols[bond[1]]
+            order = order_to_symbol[bond[2]]
+            print >> self.txt, '%3d %2s%1s%-2s %5i %5i %5i' % \
+                           ((a, symbol0, order, symbol1) + tuple(bond))
+
+
+    def print_energy(self):
+        print >> self.txt, 'Energy in eV:\t%.4f' % self.energy
+
+    def print_forces(self):
+        symbols = self.atoms.get_chemical_symbols()
+        print >> self.txt, 'Forces in eV/Ang:'
+        for a, symbol in enumerate(symbols):
+            print >> self.txt, '%3d %-2s %10.5f %10.5f %10.5f' % \
+                    ((a, symbol) + tuple(self.forces[a]))
 
