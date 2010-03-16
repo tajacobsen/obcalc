@@ -74,7 +74,7 @@ def obmol_to_atoms(mol, return_bonds=False):
                     )
 
     if return_bonds:
-        return atoms, bonds
+        return atoms, get_bonds(mol)
     else:
         return atoms
 
