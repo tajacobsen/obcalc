@@ -108,3 +108,19 @@ OpenBabel will not detect the bonds and we have to put them manually::
   relax = QuasiNewton(atoms)
   relax.run(fmax=0.05)
   # This gives the expected results
+
+Building molecules
+==================
+The code also contains a function which builds an atoms object from a SMILES
+string. To build an azobenzene molecule you could do::
+
+  #!/usr/bin/env python
+  from obcalc.tools import build_molecule
+  atoms = build_molecule('C1=CC=CC=C1N=NC2=CC=CC=C2')
+
+Or if you would build ethanol, you could do::
+
+  atoms = build_molecule('CCO')
+
+See the wikipedia article for info:
+http://en.wikipedia.org/wiki/Simplified_molecular_input_line_entry_specification
