@@ -8,6 +8,11 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY
 WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
 PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
+NOTE
+====
+Due to licensing restrictions, this code is made to run with the GPLv2 version
+of ASE! (However it works with the newer as well)
+
 Installation
 ============
 It may be necessary to edit customize.py to point to openbabel include and
