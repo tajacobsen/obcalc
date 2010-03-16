@@ -57,6 +57,8 @@ keyword          type      default value     description
 ``bonds``        ``list``  ``None``          List of bonds in molecule given as:
                                              [[begin atom idx, end atom idx, bond order], ...]
                                              If None OpenBabel will try to guess it. 
+``txt``          ``str``   None              Which file to write output too.  Defaults to
+                                             stdout ('-').
 ================ ========= ================  =================================================
 
 Examples
