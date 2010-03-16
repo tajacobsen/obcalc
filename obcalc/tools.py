@@ -43,7 +43,7 @@ def atoms_to_obmol(atoms, bonds=None):
     mol = ob.OBMol()
     for atom in atoms:
         a = mol.NewAtom()
-        a.SetAtomicNum(int(atom.get_atomic_number()))
+        a.SetAtomicNum(int(atom.number))
         a.SetVector(atom.position[0], atom.position[1], atom.position[2])
 
     if bonds is None:

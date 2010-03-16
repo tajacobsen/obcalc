@@ -16,8 +16,7 @@ import numpy as np
 import openbabel as ob
 from ase import units, Atom, Atoms
 
-from tkj.openbabel.tools import atoms_to_obmol
-from tkj.openbabel.swig import get_forces
+from obcalc.tools import atoms_to_obmol, get_forces
 
 class OBForceField:
     """OpenBabel Force Field calculator
@@ -88,7 +87,7 @@ class OBForceField:
         if self.energy is None or self.forces is None:
             return True
         if len(atoms) != len(self.atoms) or \
-           (atoms.get_atomic_numbers() != self.atoms.get_atomic_numbers()).any() or \
+           (atoms.numbers != self.atoms.numbers).any() or \
            (atoms.get_positions() != self.atoms.get_positions()).any():
             return True
         else:
@@ -124,6 +123,7 @@ class OBForceField:
             if self.txt is not None:
                 print >> self.txt, time.asctime()
 
+                #XXX: Do this myself as OpenBabel indices are funky
                 obConversion = ob.OBConversion()
                 obConversion.SetInAndOutFormats("mol", "molreport")
                 out = obConversion.WriteString(mol)
