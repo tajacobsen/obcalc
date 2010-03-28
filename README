@@ -25,6 +25,11 @@ python setup.py install
 User installation
 python setup.py install --home=$HOME/opt
 export PYTHONPATH=$HOME/opt/lib/python:$PYTHONPATH
+
+NOTE: This compilation precedure is only necessary as the upstream openbabel
+python wrapper does not wrap vector3. If/when this is fixed, the C code can be
+removed. See the following bug for details:
+http://sourceforge.net/tracker/?func=detail&aid=2969937&group_id=40728&atid=428740
         
 Introduction
 ============
