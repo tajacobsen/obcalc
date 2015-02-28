@@ -20,10 +20,10 @@ It may be necessary to edit customize.py to point to openbabel include and
 library dirs.
 
 Global installation:
-python setup.py install
+python2 setup.py install
 
 User installation
-python setup.py install --home=$HOME/opt
+python2 setup.py install --home=$HOME/opt
 export PYTHONPATH=$HOME/opt/lib/python:$PYTHONPATH
 
 NOTE: This compilation precedure is only necessary as the upstream openbabel
@@ -45,7 +45,7 @@ ghemical) included in OpenBabel.
 To use this calculator you need to have the OpenBabel python bindings
 installed:
 
-- Ubuntu/Fedora: python-openbabel
+- Arch Linux: python2-openbabel
 
 OpenBabel: http://www.openbabel.org
 
@@ -75,7 +75,7 @@ Automatic bond detection
 
 Here is an example of how to calculate the total energy CO::
         
-  #!/usr/bin/env python
+  #!/usr/bin/env python2
   from ase import molecule
   from obcalc import OBForceField
   
@@ -91,7 +91,7 @@ Adding bonds manually
 If we want to relax e.g. CO2 starting with a very large interatomic distances,
 OpenBabel will not detect the bonds and we have to put them manually::
 
-  #!/usr/bin/env python
+  #!/usr/bin/env python2
   from ase import Atoms, QuasiNewton
   from obcalc import OBForceField
 
@@ -119,7 +119,7 @@ Building molecules
 The code also contains a function which builds an atoms object from a SMILES
 string. To build an azobenzene molecule you could do::
 
-  #!/usr/bin/env python
+  #!/usr/bin/env python2
   from obcalc.tools import build_molecule
   atoms = build_molecule('C1=CC=CC=C1N=NC2=CC=CC=C2')
 
