@@ -1,5 +1,6 @@
 #!/usr/bin/env python2
-from ase import Atoms, QuasiNewton
+from ase import Atoms
+from ase.optimize import QuasiNewton
 from obcalc import OBForceField
 
 atoms = Atoms('OCO', [[0.0, 0.0, 0.0],

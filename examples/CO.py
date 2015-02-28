@@ -1,5 +1,5 @@
 #!/usr/bin/env python2
-from ase import molecule
+from ase.structure import molecule
 from obcalc import OBForceField
 
 atoms = molecule('CO')
