@@ -75,7 +75,7 @@ Automatic bond detection
 
 Here is an example of how to calculate the total energy CO
 
-.. literalinclude:: examples/CO.py
+.. literalinclude:: CO.py
     :language: python
     :linenos:
 
