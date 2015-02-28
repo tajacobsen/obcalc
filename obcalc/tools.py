@@ -4,6 +4,7 @@ Copyright (C) 2010 Troels Kofoed Jacobsen
 Code released under GPLv2 (or later). See COPYING for details.
 """
 import numpy as np
+import pybel
 import openbabel as ob
 from ase import Atom, Atoms, units
 

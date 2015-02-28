@@ -1,7 +1,9 @@
+- Importing pybel is a workaround - investigate why it is needed to make FindForceField work
 - Get rid of SWIG interface
-- Investigate which ASE ufnctions doesn't work
 - Remove necessity to use setup.py - rather just update python path and go
 
 Completed
+- Find out why force field returns None
 - Write example scripts
 - Update README to point to python2
+- Investigate which ASE ufnctions doesn't work

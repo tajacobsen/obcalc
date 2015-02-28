@@ -13,6 +13,7 @@ import sys
 import time
 
 import numpy as np
+import pybel
 import openbabel as ob
 from ase import units, Atom, Atoms
 
@@ -101,7 +102,7 @@ class OBForceField:
             mol = atoms_to_obmol(atoms, self.bonds)
             ff = ob.OBForceField.FindForceField(self.force_field)
             if ff is None:
-                print "Could not find force field: %s" % (self.force_field,)
+                print >> sys.stderr, "Could not find force field: %s" % (self.force_field,)
             ff.Setup(mol)
             energy = ff.Energy()
             ff.GetCoordinates(mol)
