@@ -75,7 +75,7 @@ Automatic bond detection
 
 Here is an example of how to calculate the total energy CO
 
-.. literalinclude examples/CO.py
+.. literalinclude:: examples/CO.py
     :language: python
     :linenos:
 
@@ -83,18 +83,18 @@ Adding bonds manually
 ---------------------
 
 If we want to relax e.g. CO2 starting with a very large interatomic distances,
-OpenBabel will not detect the bonds and we have to put them manually::
+OpenBabel will not detect the bonds and we have to put them manually
 
-.. literalinclude examples/CO2-relax.py
+.. literalinclude:: examples/CO2-relax.py
     :language: python
     :linenos:
 
 Building molecules
 ==================
 The code also contains a function which builds an atoms object from a SMILES
-string. To build an azobenzene molecule you could do::
+string. To build an azobenzene molecule you could do
 
-.. literalinclude examples/Azobenzene.py
+.. literalinclude:: examples/Azobenzene.py
     :language: python
     :linenos:
 
