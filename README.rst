@@ -73,30 +73,56 @@ Examples
 Automatic bond detection 
 ------------------------
 
-Here is an example of how to calculate the total energy CO
+Here is an example of how to calculate the total energy CO::
 
-.. literalinclude:: CO.py
-    :language: python
-    :linenos:
+  #!/usr/bin/env python2
+  from ase.structure import molecule
+  from obcalc import OBForceField
+  
+  atoms = molecule('CO')
+  
+  calc = OBForceField()
+  atoms.set_calculator(calc)
+  e = atoms.get_potential_energy()
 
 Adding bonds manually
 ---------------------
 
 If we want to relax e.g. CO2 starting with a very large interatomic distances,
-OpenBabel will not detect the bonds and we have to put them manually
+OpenBabel will not detect the bonds and we have to put them manually::
 
-.. literalinclude:: examples/CO2-relax.py
-    :language: python
-    :linenos:
+  #!/usr/bin/env python2
+  from ase import Atoms
+  from ase.optimize import QuasiNewton
+  from obcalc import OBForceField
+  
+  atoms = Atoms('OCO', [[0.0, 0.0, 0.0],
+                        [3.0, 0.0, 0.0],
+                        [6.0, 0.0, 0.0]])
+  
+  calc = OBForceField()
+  atoms.set_calculator(calc)
+  relax = QuasiNewton(atoms)
+  relax.run(fmax=0.05)
+  # This results in a even larger interatomic distances
+  # Therefore we add two double bonds
+  
+  bonds = [[0, 1, 2], # Double bond between atom 0 and atom 1
+           [1, 2, 2]] # Double bond between atom 1 and atom 2
+  calc = OBForceField(bonds=bonds)
+  atoms.set_calculator(calc)
+  relax = QuasiNewton(atoms)
+  relax.run(fmax=0.05)
+  # This gives the expected results
 
 Building molecules
 ==================
 The code also contains a function which builds an atoms object from a SMILES
-string. To build an azobenzene molecule you could do
+string. To build an azobenzene molecule you could do::
 
-.. literalinclude:: examples/Azobenzene.py
-    :language: python
-    :linenos:
+  #!/usr/bin/env python2
+  from obcalc.tools import build_molecule
+  atoms = build_molecule('C1=CC=CC=C1N=NC2=CC=CC=C2')
 
 Or if you would build ethanol, you could do::
 
