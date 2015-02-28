@@ -36,7 +36,7 @@ class OBForceField:
         Parameters
         ==========
         force_field: str
-            One of 'UFF', 'ghemical'
+            One of 'UFF', 'ghemical', 'GAFF', 'MMFF94'
         bonds: list of lists of 3xint
             Define bonds between atoms such as:
                 [[begin atom index, end atom index, bond order],
@@ -100,6 +100,8 @@ class OBForceField:
         if self.calculation_required(atoms, ['energy', 'forces']):
             mol = atoms_to_obmol(atoms, self.bonds)
             ff = ob.OBForceField.FindForceField(self.force_field)
+            if ff is None:
+                print "Could not find force field: %s" % (self.force_field,)
             ff.Setup(mol)
             energy = ff.Energy()
             ff.GetCoordinates(mol)

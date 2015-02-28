@@ -1,5 +1,7 @@
-- Update README to point to python2
 - Get rid of SWIG interface
 - Investigate which ASE ufnctions doesn't work
-- Write example scripts
 - Remove necessity to use setup.py - rather just update python path and go
+
+Completed
+- Write example scripts
+- Update README to point to python2

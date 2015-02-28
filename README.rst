@@ -59,7 +59,7 @@ Here is a detailed list of all the keywords for the calculator:
 ================ ========= ================  =================================================
 keyword          type      default value     description
 ================ ========= ================  =================================================
-``force_field``  ``str``   ``'UFF'``         Force field ('UFF' or 'ghemical')
+``force_field``  ``str``   ``'UFF'``         Force field ('UFF', 'ghemical', 'GAFF', 'MMFF94')
 ``bonds``        ``list``  ``None``          List of bonds in molecule given as:
                                              [[begin atom idx, end atom idx, bond order], ...]
                                              If None OpenBabel will try to guess it. 
