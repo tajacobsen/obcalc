@@ -19,14 +19,16 @@ Installation
 It may be necessary to edit customize.py to point to openbabel include and
 library dirs.
 
-Global installation:
-python2 setup.py install
+Global installation::
 
-User installation
-python2 setup.py install --home=$HOME/opt
-export PYTHONPATH=$HOME/opt/lib/python:$PYTHONPATH
+    python2 setup.py install
 
-For Python3 please:
+User installation::
+
+    python2 setup.py install --home=$HOME/opt
+    export PYTHONPATH=$HOME/opt/lib/python:$PYTHONPATH
+
+For Python3 please::
 
     cd swig
     swig -c++ -py3 -python obwrap.i
