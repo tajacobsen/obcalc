@@ -79,7 +79,11 @@ class OBForceField:
 
     def get_stress(self, atoms):
         """Return the stress."""
-        raise NotImplementedError
+        # Returning NotImplementedError
+        # does not seem to get handled well by
+        # ase.optimize.BFGS(..., trajector='....)
+        # using ASE 3.15
+        return np.array([])
 
     def set_atoms(self, atoms):
         self.atoms = atoms.copy()

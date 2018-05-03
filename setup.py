@@ -10,6 +10,10 @@ To generate swig files:
     swig -c++ -python obwrap.i
     mv obwrap.py ../obcalc
 
+    Note: when using python3 one has to use
+    swig -c++ -py3 obwrap.i
+
+
 To build:
     python setup.py build_ext
 """
@@ -26,7 +30,9 @@ include_dirs = []
 
 customize = 'customize.py'
 if os.path.isfile(customize):
-    execfile(customize)
+    # workaround for execfile that work
+    # python2 and python3
+    exec(compile(open(customize).read(), customize, 'exec'))
 
 obwrap_module = Extension('_obwrap',
                           sources=['swig/obwrap_wrap.cxx', 'swig/obwrap.cxx'],

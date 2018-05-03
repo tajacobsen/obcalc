@@ -19,12 +19,20 @@ Installation
 It may be necessary to edit customize.py to point to openbabel include and
 library dirs.
 
-Global installation:
-python2 setup.py install
+Global installation::
 
-User installation
-python2 setup.py install --home=$HOME/opt
-export PYTHONPATH=$HOME/opt/lib/python:$PYTHONPATH
+    python2 setup.py install
+
+User installation::
+
+    python2 setup.py install --home=$HOME/opt
+    export PYTHONPATH=$HOME/opt/lib/python:$PYTHONPATH
+
+For Python3 please::
+
+    cd swig
+    swig -c++ -py3 -python obwrap.i
+    mv obwrap.py ../obcalc
 
 NOTE: This compilation precedure is only necessary as the upstream openbabel
 python wrapper does not wrap vector3. If/when this is fixed, the C code can be
